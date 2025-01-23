@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Captura de Texto em Fotos",
+  "description": "Captura área da tela e extrai texto.",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "clipboardWrite",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "css": ["selection-styles.css"],
+    "js": ["content.js"],
+    "run_at": "document_end"
+  }],
+  "web_accessible_resources": [{
+    "resources": [
+      "js/*",
+      "selection-styles.css"
+    ],
+    "matches": ["<all_urls>"]
+  }],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
